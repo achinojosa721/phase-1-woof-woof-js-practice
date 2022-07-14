@@ -16,3 +16,19 @@ function getOneDog(id){
     return fetch(baseURL + `/${id}`)
     .then(response => response.json())
 }
+
+function renderAllInBar(dogsArr, filter = false){
+    bar.innerHTML = ''
+    if (filter){
+        dogsArr.filter(dogObj => dogObj.isGoodDog).forEach(addOneDogToBar)
+    }
+}
+
+
+
+
+
+
+
+
+getAllDogs().then(renderAllInBar)
