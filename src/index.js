@@ -21,8 +21,23 @@ function renderAllInBar(dogsArr, filter = false){
     bar.innerHTML = ''
     if (filter){
         dogsArr.filter(dogObj => dogObj.isGoodDog).forEach(addOneDogToBar)
+    } else {
+        dogsArr.forEach(addOneDogToBar)
     }
 }
+
+function addOneDogToBar(dogObj){
+    const dogSpan = document.createElement('span')
+    dogSpan.innerText = dogObj.name
+    dogSpan.addEventListener('click', handleSpanClick)
+    bar.append(dogSpan)
+}
+
+function showOneDog(dogObj){
+    console.log(dogObj)
+}
+
+
 
 
 
