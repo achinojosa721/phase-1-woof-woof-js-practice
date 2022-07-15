@@ -39,13 +39,31 @@ function showOneDog(dogObj){
     const dogDiv = document.createElement('div')
     dogDiv.innerHTML = `
         <img src =${dogObj.image}>
-        <h2>${dogObj.name<h2>}`
+        <h2>${dogObj.name}<h2>`
     const pupButton = document.createElement('button')
 
     pupButton.textContent = ((dogObj.isGoodDog) ? "Good Dog" : "Bad Dog")
     pupButton.addEventListener('click', () => togglePupButton(pupButton))
     details.append(dogDiv, pupButton)
 }
+
+    function handleSpanClick(event){
+        const id = event.target.dataset.id
+        getOneDog(id).then(showOneDog)
+    }
+
+    function toggleFilter(){
+        if (filterButton.innerText.includes('OFF')){
+            filterButton.innerText = 'Filter good dogs: ON'
+            //renderAllInBar(goodDogsArr)
+            getAllDogs().then(dogArr => renderAllInBar(dogArr, true))
+        } else {
+            filterButton.innerText = "Filter good dogs: OFF"
+            //renderAllInBar(allDogsArr)
+            getAllDogs().then(renderAllInBar)
+        }
+    }
+getAllDogs().then(renderAllInBar)
 
 
 
