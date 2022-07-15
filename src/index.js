@@ -34,8 +34,19 @@ function addOneDogToBar(dogObj){
 }
 
 function showOneDog(dogObj){
-    console.log(dogObj)
+    //console.log(dogObj)
+    details.innerHTML = ''
+    const dogDiv = document.createElement('div')
+    dogDiv.innerHTML = `
+        <img src =${dogObj.image}>
+        <h2>${dogObj.name<h2>}`
+    const pupButton = document.createElement('button')
+
+    pupButton.textContent = ((dogObj.isGoodDog) ? "Good Dog" : "Bad Dog")
+    pupButton.addEventListener('click', () => togglePupButton(pupButton))
+    details.append(dogDiv, pupButton)
 }
+
 
 
 
