@@ -1,4 +1,4 @@
-const baseURL = " http://localhost:3000/pups"
+const baseURL = "http://localhost:3000/pups"
 
 const bar = document.querySelector("#dog-bar")
 const details = document.querySelector("#dog-info")
@@ -7,9 +7,9 @@ const filterButton = document.querySelector("#good-dog-filter")
 filterButton.addEventListener('click', toggleFilter)
 
 function getAllDogs(){
-    return fetch(baseURL)
-    .then (response => response.json())
-    .then(renderAllInBar)
+ return fetch(baseURL)
+    .then(response => response.json())
+    //.then(renderAllInBar)
 }
 
 function getOneDog(id){
@@ -24,17 +24,20 @@ function renderAllInBar(dogsArr, filter = false){
     } else {
         dogsArr.forEach(addOneDogToBar)
     }
+        
 }
+
 
 function addOneDogToBar(dogObj){
     const dogSpan = document.createElement('span')
     dogSpan.innerText = dogObj.name
+    dogSpan.dataset.id = dogObj.id
     dogSpan.addEventListener('click', handleSpanClick)
-    bar.append(dogSpan)
+    bar.appendChild(dogSpan)
 }
 
 function showOneDog(dogObj){
-    //console.log(dogObj)
+    console.log(dogObj)
     details.innerHTML = ''
     const dogDiv = document.createElement('div')
     dogDiv.innerHTML = `
@@ -52,27 +55,20 @@ function showOneDog(dogObj){
         getOneDog(id).then(showOneDog)
     }
 
+    function togglePupButton(pupButton){
+        pupButton.textContent = pupButton.textContent.includes("Good") ? "Bad Dog" : "Good Dog"
+    }
+
     function toggleFilter(){
-        if (filterButton.innerText.includes('OFF')){
-            filterButton.innerText = 'Filter good dogs: ON'
-            //renderAllInBar(goodDogsArr)
+        if (filterButton.innerText.includes("OFF")){
+            filterButton.innerText = "Filter good dogs : ON"
+            //renderAllInBar(filteredArr)
             getAllDogs().then(dogArr => renderAllInBar(dogArr, true))
-        } else {
-            filterButton.innerText = "Filter good dogs: OFF"
-            //renderAllInBar(allDogsArr)
+        } else { 
+            filterButton.innerText = "Filter good dogs : OFF"
+            //renderAllinBar(allDogsArr)
             getAllDogs().then(renderAllInBar)
         }
     }
-getAllDogs().then(renderAllInBar)
-
-
-
-
-
-
-
-
-
-
-
+        
 getAllDogs().then(renderAllInBar)
